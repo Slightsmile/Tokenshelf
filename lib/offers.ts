@@ -49,6 +49,48 @@ const checkedAt = "2026-11-23";
 
 const offerEntries: Offer[] = [
   {
+    id: "clixad",
+    provider: "Clixad",
+    title: "Invite bonus + daily credits and surveys",
+    description: "25,000 credits on sign-up through the invite link, 300 credits for daily login, and 10,000 credits per completed survey.",
+    category: "Text & chat",
+    amount: "25,000 credits",
+    rewardLabel: "+ 300 daily · 10,000 per survey",
+    requirement: "New account through the invite link",
+    refresh: "Daily login + daily surveys, community-reported",
+    access: "Multi-model AI access",
+    tone: "blue",
+    mark: "CX",
+    url: "https://app.clixad.io/account?invite=C8WNRV44",
+    verification: "community",
+    checkedAt: "2026-11-24",
+    code: "C8WNRV44",
+    codeLabel: "Invite code",
+    benefits: [
+      "The submitted offer lists a 25,000-credit bonus when you join through the supplied invite link.",
+      "Log in each day to receive 300 free credits.",
+      "The submission describes free surveys arriving daily, with 10,000 credits for each completed survey.",
+      "Use credits with the seven model routes listed in the submission.",
+    ],
+    models: ["deepseek-v4-flash", "claude-haiku-5.5", "gemini-2.5-flash-lite", "gpt-5-nano", "gemini-3.5-flash-lite", "glm-5.3-flash", "kimi-k2.5"],
+    modelNote: "These exact model IDs come from the community submission. Check the current model list in your Clixad account for availability and credit costs.",
+    steps: [
+      { title: "Join through the invite link", description: "Open the full invitation URL with C8WNRV44 applied, create your account, and check for the 25,000-credit bonus.", link: { label: "Join Clixad with the invitation", url: "https://app.clixad.io/account?invite=C8WNRV44" } },
+      { title: "Collect your daily login credits", description: "Log in each day and check your account for the 300-credit daily reward." },
+      { title: "Complete available free surveys", description: "Check your account for the daily surveys described in the submission. Complete an available survey and check for its 10,000-credit reward." },
+      { title: "Choose a supported model", description: "Select one of the listed model routes and review its credit cost before using your balance." },
+    ],
+    conditions: [
+      "The 25,000-credit sign-up bonus is described as an invitation offer; use the supplied link when joining.",
+      "Daily login rewards, daily survey availability, and the 10,000-credit survey reward are community-reported.",
+      "The submission does not specify credit expiry, daily reset time, survey eligibility, or the number of surveys available per account.",
+    ],
+    sourceNote: "The invite link, reward amounts, daily survey information, and model IDs were supplied in a community submission. They have not been independently verified.",
+    sources: [
+      { label: "Clixad account invitation", url: "https://app.clixad.io/account?invite=C8WNRV44" },
+    ],
+  },
+  {
     id: "freegg",
     provider: "FreeGG",
     title: "GPT-6.1 Sol credits + daily login",
@@ -425,47 +467,6 @@ const offerEntries: Offer[] = [
     ],
   },
   {
-    id: "layso",
-    provider: "LAYSO",
-    title: "Free model activities",
-    description: "Try featured models using a free activity key and a shared token allowance.",
-    category: "Multimodal",
-    amount: "Free model access",
-    rewardLabel: "Allowance varies by activity",
-    requirement: "Account + eligible activity",
-    refresh: "Per-activity dates and limits",
-    access: "Chat, image, video & audio API",
-    tone: "green",
-    mark: "L",
-    url: "https://layso.ai/activities",
-    verification: "confirmed",
-    checkedAt,
-    docsUrl: "https://docs.laysoai.com",
-    benefits: [
-      "Eligible calls with a key bound to a free activity cost 0 and do not deduct the ordinary platform balance.",
-      "Each activity has a designated model and a token pool shared by participants, with visible used and remaining amounts.",
-      "Activity calls stop when the activity ends, pauses, or reaches a limit. They do not automatically switch to paid calls.",
-    ],
-    models: ["Chat", "Image", "Video", "Audio"],
-    modelFamilies: ["chatgpt", "claude", "grok"],
-    modelNote: "The platform supports these modalities, but each free activity covers only its designated model. The paid catalogue lists Claude Fable 5, GPT Image 2, GPT-5.6, Grok 4.6, GPT-6.1 Sol, and Seedream 5.5; those listings do not establish current free eligibility.",
-    steps: [
-      { title: "Choose an available activity", description: "Check its designated model, dates, remaining shared allowance, and participation requirements.", link: { label: "See current activities", url: "https://layso.ai/activities" } },
-      { title: "Bind an activity key", description: "Sign in and create or bind the fixed key for that activity. Follow any eligibility conditions shown on the activity page." },
-      { title: "Use the exact activity model", description: "Connect your tool with the activity key, displayed API address, and matching model ID. Send a small test request and monitor the remaining allowance." },
-    ],
-    conditions: [
-      "Each account binds one fixed key per activity. That key is for the activity's designated model only.",
-      "Account request limits, token limits, and reset periods are activity-specific. Some activities may require a top-up to qualify.",
-      "A published programme does not guarantee an activity is currently open or has remaining tokens.",
-    ],
-    sourceNote: "The free-activity rules, shared pools, key requirements, and stop-without-paid-fallback behaviour are confirmed by the official programme guide.",
-    sources: [
-      { label: "Free activity rules and eligibility", url: "https://layso.ai/blog/model-offers" },
-      { label: "Current free activities", url: "https://layso.ai/activities" },
-    ],
-  },
-  {
     id: "budsin",
     provider: "BudsAI",
     title: "Sign-up credits + daily check-in",
@@ -706,10 +707,10 @@ const offerEntries: Offer[] = [
   },
 ];
 
-export const featuredOfferOrder = ["seekai", "freegg", "muse", "hcnsec", "qronos", "vyceai", "agentrouter", "wusrouter", "synterolink", "wajo", "tokenharbor", "xingchi"];
+export const featuredOfferOrder = ["seekai", "freegg", "muse", "hcnsec", "qronos", "vyceai", "agentrouter", "wusrouter", "synterolink", "wajo", "tokenharbor"];
 
 export function compareOffers(a: Offer, b: Offer) {
-  return (a.featured ?? Number.MAX_SAFE_INTEGER) - (b.featured ?? Number.MAX_SAFE_INTEGER) || b.checkedAt.localeCompare(a.checkedAt) || a.provider.localeCompare(b.provider);
+  return Number(a.id === "xingchi") - Number(b.id === "xingchi") || (a.featured ?? Number.MAX_SAFE_INTEGER) - (b.featured ?? Number.MAX_SAFE_INTEGER) || b.checkedAt.localeCompare(a.checkedAt) || a.provider.localeCompare(b.provider);
 }
 
 const featuredRanks = new Map(featuredOfferOrder.map((id, index) => [id, index + 1] as const));
