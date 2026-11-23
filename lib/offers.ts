@@ -1052,7 +1052,11 @@ export const featuredOffers = offers
   .filter((offer) => offer.featured !== undefined)
   .sort((a, b) => a.featured! - b.featured!);
 
-export const otherOffers = offers.filter((offer) => offer.featured === undefined);
+export const landingMoreOfferOrder = ["wajo", "deepgram", "mlai", "gemini", "clixad", "qronos"];
+
+export const landingMoreOffers = landingMoreOfferOrder
+  .map((id) => offers.find((offer) => offer.id === id))
+  .filter((offer): offer is Offer => Boolean(offer));
 
 export const getOffer = (id: string) => offers.find((offer) => offer.id === id);
 

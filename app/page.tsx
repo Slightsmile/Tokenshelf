@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { categories, featuredOffers, offers, otherOffers } from "../lib/offers";
+import { categories, featuredOffers, landingMoreOffers, offers } from "../lib/offers";
 import HeroShelf from "./components/HeroShelf";
 import Icon from "./components/Icon";
 import OfferCard from "./components/OfferCard";
@@ -31,7 +31,7 @@ export default function Home() {
 
       <section className="home-section recent-section shell" aria-labelledby="other-title">
         <div className="section-heading" data-reveal=""><div><h2 id="other-title">More offers</h2><p>More free access to explore.</p></div><Link href="/methodology" className="quiet-link">How we check<Icon name="arrow" /></Link></div>
-        <div className="offer-list"><div className="list-heading" aria-hidden="true"><span>Offer</span><span>What you get</span><span>Models</span><span /></div>{otherOffers.map((offer, index) => <OfferRow offer={offer} reveal revealDelay={index * 45} key={offer.id} />)}</div>
+        <div className="offer-list"><div className="list-heading" aria-hidden="true"><span>Offer</span><span>What you get</span><span>Models</span><span /></div>{landingMoreOffers.map((offer, index) => <OfferRow offer={offer} reveal revealDelay={index * 45} key={offer.id} />)}</div>
       </section>
 
       <section className="home-section category-section shell" aria-labelledby="category-title">
