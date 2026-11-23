@@ -10,7 +10,7 @@ export function ProviderMark({ offer }: { offer: Pick<Offer, "id" | "tone" | "ma
 
 export function VerificationBadge({ offer }: { offer: Pick<Offer, "verification"> }) {
   const label = offer.verification === "confirmed" ? "Provider confirmed" : offer.verification === "partial" ? "Details checked" : "Community offer";
-  return <span className={`verification verification-${offer.verification}`}><Icon name={offer.verification === "confirmed" ? "check-circle" : "link"} />{label}</span>;
+  return <span className={`verification verification-${offer.verification}`}><Icon name={offer.verification === "confirmed" ? "check-circle" : offer.verification === "partial" ? "check" : "link"} />{label}</span>;
 }
 
 export function AvailabilityBadge({ offer }: { offer: Pick<Offer, "availability"> }) {
@@ -24,7 +24,7 @@ export function DailyLoginBadge({ offer }: { offer: Pick<Offer, "dailyLogin" | "
 export default function OfferCard({ offer, revealDelay = 0 }: { offer: Offer; revealDelay?: number }) {
   return (
     <article className="offer-card" data-offer-id={offer.id} data-reveal="" data-reveal-delay={revealDelay}>
-      <div className="card-provider"><ProviderMark offer={offer} /><div><h3><Link href={`/offers/${offer.id}`}>{offer.provider}</Link></h3><span>{offer.category}</span></div><SaveButton id={offer.id} provider={offer.provider} /></div>
+      <div className="card-provider"><ProviderMark offer={offer} /><div><h3><Link href={`/offers/${offer.id}`} className="card-link">{offer.provider}</Link></h3><span>{offer.category}</span></div><SaveButton id={offer.id} provider={offer.provider} /></div>
       <div className="card-reward"><p>{offer.amount}</p><span>{offer.rewardLabel}</span></div>
       <DailyLoginBadge offer={offer} />
       <p className="card-description">{offer.description}</p>

@@ -123,6 +123,8 @@ h1, h2, h3 { text-wrap: balance; }
 .offer-card { position: relative; display: flex; flex-direction: column; min-width: 0; padding: 22px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); transition: transform 240ms var(--ease-out), border-color 180ms ease-out; }
 .offer-card::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: 0 12px 26px oklch(0.3 0.025 255 / 0.075); opacity: 0; pointer-events: none; transition: opacity 240ms var(--ease-out); }
 .offer-card:focus-within { border-color: oklch(0.74 0.06 255); }
+.card-link::after, .offer-row-main::after { content: ""; position: absolute; inset: 0; z-index: 1; border-radius: inherit; }
+.card-provider .icon-button, .card-footer .inline-link, .row-actions { position: relative; z-index: 2; }
 .card-provider { display: flex; align-items: center; gap: 11px; }
 .card-provider > div { flex: 1; min-width: 0; }
 .card-provider h3 { margin: 0; font-size: 15px; font-weight: 650; letter-spacing: -0.2px; line-height: 1.4; }
