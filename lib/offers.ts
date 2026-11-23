@@ -1,4 +1,8 @@
 import type { ModelFamily } from "./model-families";
+import { compareOffers } from "./offer-order";
+
+export { compareOffers } from "./offer-order";
+export { categories } from "./offer-categories";
 
 export type OfferCategory = "Developer APIs" | "Text & chat" | "AI agents" | "Multimodal";
 export type Verification = "confirmed" | "partial" | "community";
@@ -781,19 +785,8 @@ const offerEntries: Offer[] = [
 
 export const featuredOfferOrder = ["seekai", "freegg", "muse", "hcnsec", "qronos", "vyceai", "agentrouter", "wusrouter", "synterolink", "wajo", "tokenharbor"];
 
-export function compareOffers(a: Offer, b: Offer) {
-  return Number(a.id === "xingchi") - Number(b.id === "xingchi") || (a.featured ?? Number.MAX_SAFE_INTEGER) - (b.featured ?? Number.MAX_SAFE_INTEGER) || b.checkedAt.localeCompare(a.checkedAt) || a.provider.localeCompare(b.provider);
-}
-
 const featuredRanks = new Map(featuredOfferOrder.map((id, index) => [id, index + 1] as const));
 export const offers: Offer[] = offerEntries.map((offer) => ({ ...offer, featured: featuredRanks.get(offer.id) })).sort(compareOffers);
-
-export const categories: { name: OfferCategory; description: string; icon: "code" | "chat" | "sparkles" | "layers" }[] = [
-  { name: "Developer APIs", description: "Credits and gateways for your next build.", icon: "code" },
-  { name: "Text & chat", description: "Language models, chat, and assistants.", icon: "chat" },
-  { name: "AI agents", description: "An extra pair of hands for everyday tasks.", icon: "sparkles" },
-  { name: "Multimodal", description: "Explore text, images, video, and audio.", icon: "layers" },
-];
 
 export const featuredOffers = offers
   .filter((offer) => offer.featured !== undefined)

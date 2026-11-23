@@ -47,7 +47,7 @@ export default function HeroShelf({ offers }: { offers: ShelfOffer[] }) {
   return (
     <div className="hero-visual" aria-label="A few offers on the shelf" onPointerMove={move} onPointerLeave={reset} onFocusCapture={reset}>
       <div className="offer-stack" ref={stack}>
-        {offers.map((offer, index) => <Link className={`offer-pass pass-${index + 1}`} href={`/offers/${offer.id}`} key={offer.id}><ProviderMark offer={offer} /><div className="pass-copy"><span>{offer.provider}</span><strong>{offer.amount}</strong><div className="pass-meta"><ModelLogos offer={offer} /><DailyLoginBadge offer={offer} /></div></div><span className="pass-arrow"><Icon name="arrow" /></span></Link>)}
+        {offers.map((offer, index) => <Link className={`offer-pass pass-${index + 1}`} href={`/offers/${offer.id}`} prefetch={false} key={offer.id}><ProviderMark offer={offer} /><div className="pass-copy"><span>{offer.provider}</span><strong>{offer.amount}</strong><div className="pass-meta"><ModelLogos offer={offer} /><DailyLoginBadge offer={offer} /></div></div><span className="pass-arrow"><Icon name="arrow" /></span></Link>)}
       </div>
     </div>
   );

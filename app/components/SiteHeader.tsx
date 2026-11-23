@@ -23,7 +23,7 @@ export default function SiteHeader() {
           <Link href="/methodology" className="nav-about" aria-current={pathname === "/methodology" ? "page" : undefined}>How it works</Link>
         </div>
         <div className="nav-actions">
-          <Link href="/saved" className={`saved-link${pathname === "/saved" ? " active" : ""}`} aria-label={`Saved offers${savedIds.length ? `, ${savedIds.length} saved` : ""}`} aria-current={pathname === "/saved" ? "page" : undefined}>
+          <Link href="/saved" prefetch={false} className={`saved-link${pathname === "/saved" ? " active" : ""}`} aria-label={`Saved offers${savedIds.length ? `, ${savedIds.length} saved` : ""}`} aria-current={pathname === "/saved" ? "page" : undefined}>
             <Icon name="bookmark" filled={savedIds.length > 0} /><span className="saved-label">Saved</span>{savedIds.length > 0 && <span className="saved-count">{savedIds.length}</span>}
           </Link>
           <Link href="/submit" className="button button-small button-secondary nav-submit"><Icon name="plus" /><span>Submit <span className="submit-extra">an offer</span></span></Link>

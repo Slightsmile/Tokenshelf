@@ -21,7 +21,7 @@ export default function Home() {
           </form>
           <p className="hero-caption"><span>{offers.length} offers</span> to give your next idea a head start.</p>
         </div>
-        <HeroShelf offers={heroOffers} />
+        <HeroShelf offers={heroOffers.map(({ id, provider, amount, tone, mark, models, modelFamilies, availability, category, dailyLogin, refresh }) => ({ id, provider, amount, tone, mark, models, modelFamilies, availability, category, dailyLogin, refresh }))} />
       </section>
 
       <section className="home-section shell" id="featured" aria-labelledby="featured-title">

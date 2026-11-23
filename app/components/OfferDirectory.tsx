@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { categories, compareOffers, offers } from "../../lib/offers";
+import { categories } from "../../lib/offer-categories";
+import { compareOffers } from "../../lib/offer-order";
+import type { OfferSummary } from "../../lib/offer-summary";
 import { getModelFamilies, modelFamilyInfo, modelFamilyOrder, type ModelFamily } from "../../lib/model-families";
 import Icon from "./Icon";
 import OfferCard from "./OfferCard";
@@ -16,7 +18,7 @@ const sortOptions = [
 ] as const;
 type SortOrder = typeof sortOptions[number]["value"];
 
-export default function OfferDirectory({ initialQuery = "", initialCategory = "", initialSort = "", initialModel = "" }: { initialQuery?: string; initialCategory?: string; initialSort?: string; initialModel?: string }) {
+export default function OfferDirectory({ offers, initialQuery = "", initialCategory = "", initialSort = "", initialModel = "" }: { offers: OfferSummary[]; initialQuery?: string; initialCategory?: string; initialSort?: string; initialModel?: string }) {
   const [query, setQuery] = useState(initialQuery);
   const [category, setCategory] = useState(categories.some((item) => item.name === initialCategory) ? initialCategory : "");
   const [sort, setSort] = useState<SortOrder>(sortOptions.some((item) => item.value === initialSort) ? initialSort as SortOrder : "featured");
@@ -48,7 +50,7 @@ export default function OfferDirectory({ initialQuery = "", initialCategory = ""
       if (sort === "name-desc") return b.provider.localeCompare(a.provider) || a.id.localeCompare(b.id);
       return compareOffers(a, b);
     });
-  }, [query, category, sort, model]);
+  }, [offers, query, category, sort, model]);
 
   function reset() { setQuery(""); setCategory(""); setModel(""); }
 
@@ -76,7 +78,7 @@ export default function OfferDirectory({ initialQuery = "", initialCategory = ""
       <MotionResults revision={filteredOffers.map((offer) => offer.id).join(":")} view={view ?? "auto"}>
       {filteredOffers.length > 0 ? <>
         {view !== "list" && <div className="offer-grid directory-cards">{filteredOffers.map((offer) => <OfferCard offer={offer} key={offer.id} />)}</div>}
-        {view !== "cards" && <div className="offer-list directory-list"><div className="list-heading" aria-hidden="true"><span>Offer</span><span>What you get</span><span>Models</span><span /></div>{filteredOffers.map((offer) => <OfferRow offer={offer} key={offer.id} />)}</div>}
+        {view === "list" && <div className="offer-list directory-list"><div className="list-heading" aria-hidden="true"><span>Offer</span><span>What you get</span><span>Models</span><span /></div>{filteredOffers.map((offer) => <OfferRow offer={offer} key={offer.id} />)}</div>}
       </> : <div className="empty-state"><span className="empty-icon"><Icon name="search" /></span><h2>No offers found</h2><p>Try a different provider or model, or reset your filters.</p><button className="button button-secondary" type="button" onClick={reset}>Reset filters<Icon name="arrow" /></button></div>}
       </MotionResults>
       <p className="directory-note"><Icon name="link" />Provider-confirmed details and community rewards are labeled on each offer page.</p>

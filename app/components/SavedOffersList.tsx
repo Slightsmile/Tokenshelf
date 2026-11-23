@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { compareOffers, offers } from "../../lib/offers";
+import { compareOffers } from "../../lib/offer-order";
+import type { OfferSummary } from "../../lib/offer-summary";
 import Icon from "./Icon";
 import OfferRow from "./OfferRow";
 import { useSavedOffers } from "./SavedOffersProvider";
 
-export default function SavedOffersList() {
+export default function SavedOffersList({ offers }: { offers: OfferSummary[] }) {
   const { savedIds, loaded, persistent } = useSavedOffers();
   const savedOffers = savedIds.map((id) => offers.find((offer) => offer.id === id)).filter((offer) => offer !== undefined).sort(compareOffers);
 
