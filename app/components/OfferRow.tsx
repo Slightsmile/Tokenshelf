@@ -1,16 +1,17 @@
 import Link from "next/link";
-import { formatCheckedDate, type Offer } from "../../lib/offers";
+import type { Offer } from "../../lib/offers";
 import Icon from "./Icon";
-import { ProviderMark } from "./OfferCard";
+import { AvailabilityBadge, ProviderMark } from "./OfferCard";
 import SaveButton from "./SaveButton";
+import ModelLogos from "./ModelLogos";
 
-export default function OfferRow({ offer, compact = false, revealDelay = 0 }: { offer: Offer; compact?: boolean; revealDelay?: number }) {
+export default function OfferRow({ offer, reveal = false, revealDelay = 0 }: { offer: Offer; reveal?: boolean; revealDelay?: number }) {
   return (
-    <article className={`offer-row${compact ? " offer-row-compact" : ""}`} data-reveal={compact ? "" : undefined} data-reveal-delay={compact ? revealDelay : undefined}>
-      <Link href={`/offers/${offer.id}`} className="offer-row-main"><ProviderMark offer={offer} /><span><h3>{offer.provider}</h3><span className="row-description">{offer.title}</span></span></Link>
+    <article className="offer-row" data-reveal={reveal ? "" : undefined} data-reveal-delay={reveal ? revealDelay : undefined}>
+      <Link href={`/offers/${offer.id}`} className="offer-row-main"><ProviderMark offer={offer} /><span><h3>{offer.provider}</h3><span className="row-description">{offer.title}</span><AvailabilityBadge offer={offer} /></span></Link>
       <div className="row-reward"><strong>{offer.amount}</strong><span>{offer.rewardLabel}</span></div>
-      {compact ? <time className="row-date" dateTime={offer.checkedAt}><Icon name="clock" />{formatCheckedDate(offer.checkedAt, false)}</time> : <span className="row-requirement">{offer.requirement}</span>}
-      <div className="row-actions">{!compact && <SaveButton id={offer.id} provider={offer.provider} />}<Link href={`/offers/${offer.id}`} className="icon-button row-details" aria-label={`View ${offer.provider} offer`}><Icon name="arrow" /></Link></div>
+      <div className="row-models"><ModelLogos offer={offer} /></div>
+      <div className="row-actions"><SaveButton id={offer.id} provider={offer.provider} /><Link href={`/offers/${offer.id}`} className="icon-button row-details" aria-label={`View ${offer.provider} offer`}><Icon name="arrow" /></Link></div>
     </article>
   );
 }

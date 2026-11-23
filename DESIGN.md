@@ -22,13 +22,14 @@ One modern sans-serif family with a native system fallback. Clear weight contras
 
 ## Layout
 
-Content width up to 1120px. A compact shared header. Homepage: spacious hero with a visual stack of real offer passes, three featured offers, a compact recently checked list, category navigation, and a small submission call to action. Detail pages: primary reading column and a narrower factual sidebar. Mobile collapses structurally into one column.
+Content width up to 1120px. A compact shared header. Homepage: a spacious hero reflecting the first three featured offers, three featured cards, the remaining featured offers in compact rows, then other offers and category navigation. The explicit featured order in `lib/offers.ts` is always respected before other offers, including in filtered and saved collections. Detail pages: primary reading column and a narrower factual sidebar. Mobile collapses structurally into one column.
 
 ## Components
 
 - Rounded, clearly labeled buttons with consistent hover and focus states.
 - Offer cards show provider, reward, a short description, and a details link.
 - Compact offer rows for larger collections.
+- Model-family logos replace the requirements column. Logos have accessible names and show only supported families; agent apps and offline routes get clear text fallbacks.
 - Search and explicit category filters with live result counts.
 - Persistent bookmarks shared between all pages.
 - Numbered claim steps, copyable codes, and linked sources on detail pages.

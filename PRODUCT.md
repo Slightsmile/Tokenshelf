@@ -10,7 +10,7 @@ People exploring AI tools and developers comparing free API access. Their main t
 
 ## Product Purpose
 
-A small, useful directory of free AI credits, token allowances, and model access. The homepage introduces the collection with a strong hero, followed by featured offers, recently checked offers, and browsing by category. Individual offer pages carry the detailed information.
+A small, useful directory of free AI credits, token allowances, and model access. The homepage introduces the collection with a strong hero, followed by a deliberately ordered featured collection, other offers, and browsing by category. Featured offers always appear before other offers. Individual offer pages carry the detailed information.
 
 ## Brand Personality
 

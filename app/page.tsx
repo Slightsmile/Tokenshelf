@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { categories, featuredOffers, getOffer, offers, recentOffers } from "../lib/offers";
+import { categories, featuredOffers, offers, otherOffers } from "../lib/offers";
 import HeroShelf from "./components/HeroShelf";
 import Icon from "./components/Icon";
 import OfferCard from "./components/OfferCard";
 import OfferRow from "./components/OfferRow";
 import ScrollMotion from "./components/ScrollMotion";
 
-const heroOffers = [getOffer("muse")!, getOffer("qronos")!, getOffer("tokenharbor")!];
+const heroOffers = featuredOffers.slice(0, 3);
 
 export default function Home() {
   return (
@@ -27,12 +27,13 @@ export default function Home() {
 
       <section className="home-section shell" id="featured" aria-labelledby="featured-title">
         <div className="section-heading" data-reveal=""><div><h2 id="featured-title">Featured offers<span className="heading-dot">.</span></h2><p>Big token drops and useful everyday access.</p></div><Link href="/browse" className="inline-link">Browse all {offers.length}<Icon name="arrow" /></Link></div>
-        <div className="offer-grid">{featuredOffers.map((offer, index) => <OfferCard offer={offer} revealDelay={index * 65} key={offer.id} />)}</div>
+        <div className="offer-grid">{featuredOffers.slice(0, 3).map((offer, index) => <OfferCard offer={offer} revealDelay={index * 65} key={offer.id} />)}</div>
+        <div className="offer-list featured-list"><div className="list-heading" aria-hidden="true"><span>Offer</span><span>What you get</span><span>Models</span><span /></div>{featuredOffers.slice(3).map((offer, index) => <OfferRow offer={offer} reveal revealDelay={index % 3 * 45} key={offer.id} />)}</div>
       </section>
 
-      <section className="home-section recent-section shell" aria-labelledby="recent-title">
-        <div className="section-heading" data-reveal=""><div><h2 id="recent-title">Recently checked</h2><p>Fresh details from the source.</p></div><Link href="/methodology" className="quiet-link">How we check<Icon name="arrow" /></Link></div>
-        <div className="offer-list"><div className="list-heading compact-list-heading" aria-hidden="true"><span>Offer</span><span>Free access</span><span>Checked</span><span /></div>{recentOffers.map((offer, index) => <OfferRow offer={offer} compact revealDelay={index * 45} key={offer.id} />)}</div>
+      <section className="home-section recent-section shell" aria-labelledby="other-title">
+        <div className="section-heading" data-reveal=""><div><h2 id="other-title">More offers</h2><p>More free access to explore.</p></div><Link href="/methodology" className="quiet-link">How we check<Icon name="arrow" /></Link></div>
+        <div className="offer-list"><div className="list-heading" aria-hidden="true"><span>Offer</span><span>What you get</span><span>Models</span><span /></div>{otherOffers.map((offer, index) => <OfferRow offer={offer} reveal revealDelay={index * 45} key={offer.id} />)}</div>
       </section>
 
       <section className="home-section category-section shell" aria-labelledby="category-title">
