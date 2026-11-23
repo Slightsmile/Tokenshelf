@@ -25,16 +25,15 @@ const aiInstruction = [
 export default function IntegrationPage() {
   return (
     <PageShell
-      eyebrow="Developer docs"
       title="Connect any compatible provider."
       intro="These steps work with any OpenAI- or Anthropic-compatible API. Point the tool at the provider's base URL, paste a key, and let it discover models."
     >
       <section className="docs-steps" aria-labelledby="docs-steps-title">
         <h2 id="docs-steps-title">Three things every tool needs</h2>
         <ol>
-          <li><strong>An API key</strong> from your provider's dashboard.</li>
-          <li><strong>A base URL</strong> that matches the protocol the tool expects.</li>
-          <li><strong>A model ID</strong> from the provider's model list.</li>
+          <li><span><strong>An API key</strong> from your provider's dashboard.</span></li>
+          <li><span><strong>A base URL</strong> that matches the protocol the tool expects.</span></li>
+          <li><span><strong>A model ID</strong> from the provider's model list.</span></li>
         </ol>
       </section>
 
