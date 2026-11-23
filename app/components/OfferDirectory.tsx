@@ -6,6 +6,7 @@ import { getModelFamilies, modelFamilyInfo, modelFamilyOrder, type ModelFamily }
 import Icon from "./Icon";
 import OfferCard from "./OfferCard";
 import OfferRow from "./OfferRow";
+import MotionResults from "./MotionResults";
 
 const sortOptions = [
   { value: "featured", label: "Featured" },
@@ -72,10 +73,12 @@ export default function OfferDirectory({ initialQuery = "", initialCategory = ""
           </div>
         </div>
       </div>
+      <MotionResults revision={filteredOffers.map((offer) => offer.id).join(":")} view={view ?? "auto"}>
       {filteredOffers.length > 0 ? <>
         {view !== "list" && <div className="offer-grid directory-cards">{filteredOffers.map((offer) => <OfferCard offer={offer} key={offer.id} />)}</div>}
         {view !== "cards" && <div className="offer-list directory-list"><div className="list-heading" aria-hidden="true"><span>Offer</span><span>What you get</span><span>Models</span><span /></div>{filteredOffers.map((offer) => <OfferRow offer={offer} key={offer.id} />)}</div>}
       </> : <div className="empty-state"><span className="empty-icon"><Icon name="search" /></span><h2>No offers found</h2><p>Try a different provider or model, or reset your filters.</p><button className="button button-secondary" type="button" onClick={reset}>Reset filters<Icon name="arrow" /></button></div>}
+      </MotionResults>
       <p className="directory-note"><Icon name="link" />Provider-confirmed details and community rewards are labeled on each offer page.</p>
     </section>
   );

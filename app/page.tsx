@@ -4,7 +4,6 @@ import HeroShelf from "./components/HeroShelf";
 import Icon from "./components/Icon";
 import OfferCard from "./components/OfferCard";
 import OfferRow from "./components/OfferRow";
-import ScrollMotion from "./components/ScrollMotion";
 
 const heroOffers = featuredOffers.slice(0, 3);
 
@@ -22,7 +21,7 @@ export default function Home() {
           </form>
           <p className="hero-caption"><span>{offers.length} offers</span> to give your next idea a head start.</p>
         </div>
-        <HeroShelf offers={heroOffers.map(({ id, provider, amount, tone, mark }) => ({ id, provider, amount, tone, mark }))} />
+        <HeroShelf offers={heroOffers} />
       </section>
 
       <section className="home-section shell" id="featured" aria-labelledby="featured-title">
@@ -44,7 +43,6 @@ export default function Home() {
       </section>
 
       <section className="submission-banner shell" data-reveal=""><span className="submission-icon"><Icon name="plus" /></span><div><h2>Found something good?</h2><p>Share an offer. Give someone else a head start.</p></div><Link href="/submit" className="button button-secondary">Share an offer<Icon name="arrow" /></Link></section>
-      <ScrollMotion />
     </main>
   );
 }

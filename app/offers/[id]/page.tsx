@@ -4,7 +4,8 @@ import { notFound } from "next/navigation";
 import { formatCheckedDate, getOffer, offers } from "../../../lib/offers";
 import CopyField from "../../components/CopyField";
 import Icon from "../../components/Icon";
-import { AvailabilityBadge, ProviderMark, VerificationBadge } from "../../components/OfferCard";
+import { AvailabilityBadge, DailyLoginBadge, ProviderMark, VerificationBadge } from "../../components/OfferCard";
+import ModelLogos from "../../components/ModelLogos";
 import SaveButton from "../../components/SaveButton";
 
 export function generateStaticParams() { return offers.map((offer) => ({ id: offer.id })); }
@@ -25,6 +26,7 @@ export default function OfferPage({ params }: { params: { id: string } }) {
       <div className="detail-layout">
         <aside className="offer-summary" aria-label="Offer at a glance">
           <p className="summary-label">What you get</p><p className="summary-amount">{offer.amount}</p><p className="summary-reward-label">{offer.rewardLabel}</p>
+          <div className="summary-signals"><ModelLogos offer={offer} /><DailyLoginBadge offer={offer} /></div>
           {offer.code && <CopyField label={offer.codeLabel ?? "Redeem code"} value={offer.code} />}
           <a className="button summary-visit" href={offer.url} target="_blank" rel="noopener noreferrer">Visit {offer.id === "muse" ? "Muse" : "provider"}<Icon name="external" /></a>
           <SaveButton id={offer.id} provider={offer.provider} showLabel />

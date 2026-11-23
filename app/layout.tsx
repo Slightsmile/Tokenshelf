@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import SavedOffersProvider from "./components/SavedOffersProvider";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
+import ScrollMotion from "./components/ScrollMotion";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body><SavedOffersProvider><a href="#main" className="skip-link">Skip to content</a><SiteHeader />{children}<SiteFooter /></SavedOffersProvider></body>
+      <body><SavedOffersProvider><a href="#main" className="skip-link">Skip to content</a><SiteHeader />{children}<SiteFooter /><ScrollMotion /></SavedOffersProvider></body>
     </html>
   );
 }

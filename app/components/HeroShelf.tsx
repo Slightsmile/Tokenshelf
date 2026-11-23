@@ -4,9 +4,10 @@ import Link from "next/link";
 import { useEffect, useRef, type PointerEvent } from "react";
 import type { Offer } from "../../lib/offers";
 import Icon from "./Icon";
-import { ProviderMark } from "./OfferCard";
+import { DailyLoginBadge, ProviderMark } from "./OfferCard";
+import ModelLogos from "./ModelLogos";
 
-type ShelfOffer = Pick<Offer, "id" | "provider" | "amount" | "tone" | "mark">;
+type ShelfOffer = Pick<Offer, "id" | "provider" | "amount" | "tone" | "mark" | "models" | "modelFamilies" | "availability" | "category" | "dailyLogin" | "refresh">;
 
 export default function HeroShelf({ offers }: { offers: ShelfOffer[] }) {
   const stack = useRef<HTMLDivElement>(null);
@@ -46,7 +47,7 @@ export default function HeroShelf({ offers }: { offers: ShelfOffer[] }) {
   return (
     <div className="hero-visual" aria-label="A few offers on the shelf" onPointerMove={move} onPointerLeave={reset} onFocusCapture={reset}>
       <div className="offer-stack" ref={stack}>
-        {offers.map((offer, index) => <Link className={`offer-pass pass-${index + 1}`} href={`/offers/${offer.id}`} key={offer.id}><ProviderMark offer={offer} /><span className="pass-copy"><span>{offer.provider}</span><strong>{offer.amount}</strong></span><span className="pass-arrow"><Icon name="arrow" /></span></Link>)}
+        {offers.map((offer, index) => <Link className={`offer-pass pass-${index + 1}`} href={`/offers/${offer.id}`} key={offer.id}><ProviderMark offer={offer} /><div className="pass-copy"><span>{offer.provider}</span><strong>{offer.amount}</strong><div className="pass-meta"><ModelLogos offer={offer} /><DailyLoginBadge offer={offer} /></div></div><span className="pass-arrow"><Icon name="arrow" /></span></Link>)}
       </div>
     </div>
   );

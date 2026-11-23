@@ -1,7 +1,7 @@
 import type { Offer } from "../../lib/offers";
 import { getModelFamilies, modelFamilyInfo } from "../../lib/model-families";
 
-export default function ModelLogos({ offer }: { offer: Offer }) {
+export default function ModelLogos({ offer }: { offer: Pick<Offer, "provider" | "models" | "modelFamilies" | "availability" | "category"> }) {
   const families = getModelFamilies(offer);
   if (!families.length) return <span className="model-empty">{offer.availability === "offline" ? "Offline" : offer.category === "AI agents" ? "AI agent" : "See model list"}</span>;
 
