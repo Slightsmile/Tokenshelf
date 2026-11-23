@@ -980,9 +980,70 @@ const offerEntries: Offer[] = [
       ],
     },
   },
+  {
+    id: "gemini",
+    provider: "Google Gemini API",
+    title: "Free tier for eligible Gemini models",
+    description: "Free input and output tokens on eligible Gemini and Gemma models through Google AI Studio. No billing account or card; limits are model-specific.",
+    category: "Developer APIs",
+    amount: "Free tokens",
+    rewardLabel: "No billing · per-project limits",
+    requirement: "Google account; no card",
+    refresh: "Model-specific limits; daily reset (PT)",
+    access: "Gemini API, AI Studio & OpenAI-compatible endpoint",
+    tone: "blue",
+    mark: "G",
+    url: "https://aistudio.google.com/",
+    verification: "partial",
+    checkedAt,
+    benefits: [
+      "The free tier provides free input and output tokens on eligible models without a billing account or payment card.",
+      "Eligible routes include Gemini 3.8 Flash, Gemini 3.6 Flash, Gemini 3.5 Flash-Lite, Gemini 3.1 Flash-Lite, and Gemma 4.",
+      "Keys are created in Google AI Studio and work with both the native Gemini API and an OpenAI-compatible endpoint.",
+      "Free audio and embedding routes also list free input and output, including Gemini 3.8 Live, 3.8 Flash TTS, 3.5 Transcribe, and Gemini Embedding 2.",
+      "When a rate limit is reached the API returns HTTP 429 and requests fail; there is no automatic billing fallback.",
+    ],
+    models: ["gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemma-4-31b-it", "gemma-4-26b-a4b-it"],
+    modelNote: "Free access is decided per model, not per account. Gemini 4 Argon and the image and video models are not available on the free tier. Access to older 2.5 models is limited to projects that already used them.",
+    steps: [
+      { title: "Create a free API key in Google AI Studio", description: "Sign in with a Google account and create a key from AI Studio. No billing setup is required for the free tier.", link: { label: "Open Google AI Studio", url: "https://aistudio.google.com/" } },
+      { title: "Check your project's rate limits", description: "Google publishes RPM, TPM, and RPD limits per model in the AI Studio rate-limit console for your project.", link: { label: "View rate limits", url: "https://aistudio.google.com/rate-limit" } },
+      { title: "Pick an eligible model", description: "Start with gemini-3.8-flash for broad free access, or gemini-3.5-flash-lite for lighter tasks.", link: { label: "Browse models", url: "https://ai.google.dev/gemini-api/docs/models" } },
+      { title: "Connect your client", description: "Call the native Gemini endpoint, or point an OpenAI-compatible client at the compatibility base URL with the same key.", link: { label: "Read the quickstart", url: "https://ai.google.dev/gemini-api/docs/quickstart" } },
+    ],
+    conditions: [
+      "Free limits apply per project, not per API key, so extra keys in the same project do not increase the quota.",
+      "Limits cover requests per minute, input tokens per minute, and requests per day. Daily quotas reset at midnight Pacific time, and preview models have tighter limits.",
+      "Free-tier prompts and responses may be used to improve Google products and may be reviewed by humans. Do not send customer data, secrets, or NDA material.",
+      "Gemini 4 Argon, the image models, and the video models are paid only.",
+      "The $300 Google Cloud free-trial credit does not cover Gemini API usage for accounts opened after March 2026.",
+      "Availability is restricted in some regions, including mainland China, Russia, and Hong Kong; EEA, Swiss, and UK accounts follow paid-service data terms.",
+    ],
+    sourceNote: "The free-tier model list, no-billing requirement, per-model limits, data terms, and OpenAI-compatible endpoint were checked against Google's current pricing, rate-limit, billing, and OpenAI-compatibility pages in October 2026. Exact RPM and RPD values appear per project in AI Studio rather than in one published table.",
+    sources: [
+      { label: "Gemini API pricing and free tier", url: "https://ai.google.dev/gemini-api/docs/pricing" },
+      { label: "Gemini API rate limits", url: "https://ai.google.dev/gemini-api/docs/rate-limits" },
+      { label: "OpenAI compatibility", url: "https://ai.google.dev/gemini-api/docs/openai" },
+      { label: "Google AI Studio API keys", url: "https://aistudio.google.com/app/apikey" },
+    ],
+    docsUrl: "https://ai.google.dev/gemini-api/docs",
+    modelsUrl: "https://ai.google.dev/gemini-api/docs/models",
+    integration: {
+      protocols: ["openai"],
+      openaiBase: "https://generativelanguage.googleapis.com/v1beta/openai",
+      modelsEndpoint: "https://generativelanguage.googleapis.com/v1beta/openai/models",
+      modelsUrl: "https://ai.google.dev/gemini-api/docs/models",
+      keyUrl: "https://aistudio.google.com/app/apikey",
+      notes: [
+        "Use an AI Studio key as a Bearer token with the OpenAI-compatible endpoint; the native Gemini endpoint uses the x-goog-api-key header instead.",
+        "OpenAI compatibility is in beta and covers chat completions, embeddings, images, videos, batches, and models.",
+        "Free limits are per project, not per key, and the active values are shown in the AI Studio rate-limit console.",
+      ],
+    },
+  },
 ];
 
-export const featuredOfferOrder = ["seekai", "freegg", "muse", "hcnsec", "qronos", "vyceai", "agentrouter", "wusrouter", "synterolink", "wajo", "tokenharbor"];
+export const featuredOfferOrder = ["seekai", "freegg", "muse", "hcnsec", "qronos", "vyceai", "agentrouter", "wusrouter", "gwarden", "wajo", "tokenharbor"];
 
 const featuredRanks = new Map(featuredOfferOrder.map((id, index) => [id, index + 1] as const));
 export const offers: Offer[] = offerEntries.map((offer) => ({ ...offer, featured: featuredRanks.get(offer.id) })).sort(compareOffers);

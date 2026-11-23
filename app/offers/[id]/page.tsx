@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { formatCheckedDate, getOffer, offers } from "../../../lib/offers";
-import ApiIntegration from "../../components/ApiIntegration";
 import CopyField from "../../components/CopyField";
 import Icon from "../../components/Icon";
 import { AvailabilityBadge, DailyLoginBadge, ProviderMark, VerificationBadge } from "../../components/OfferCard";
@@ -41,10 +40,9 @@ export default function OfferPage({ params }: { params: { id: string } }) {
             <h2 id="models-title">Models & access</h2>
             {offer.models.length > 0 && <ul className="model-tags">{offer.models.map((model) => <li key={model}>{model}</li>)}</ul>}
             <p>{offer.modelNote}</p>
-            {offer.apiBase && !offer.integration && <CopyField label="API base URL" value={offer.apiBase} />}
+            {offer.apiBase && <CopyField label="API base URL" value={offer.apiBase} />}
             {(offer.modelsUrl || offer.docsUrl) && <div className="model-links">{offer.modelsUrl && <a className="inline-link" href={offer.modelsUrl} target="_blank" rel="noopener noreferrer">View model list<Icon name="external" /></a>}{offer.docsUrl && <a className="inline-link" href={offer.docsUrl} target="_blank" rel="noopener noreferrer">Provider documentation<Icon name="external" /></a>}</div>}
           </section>
-          <ApiIntegration offer={offer} />
           <section aria-labelledby="conditions-title"><h2 id="conditions-title">Good to know</h2><ul className="conditions-list">{offer.conditions.map((condition) => <li key={condition}>{condition}</li>)}</ul></section>
           <section className="sources-section" aria-labelledby="sources-title"><div className="detail-section-heading"><h2 id="sources-title">Sources & verification</h2><time dateTime={offer.checkedAt}>{formatCheckedDate(offer.checkedAt)}</time></div><p>{offer.sourceNote}</p><ul className="source-links">{offer.sources.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noopener noreferrer"><Icon name="link" /><span>{source.label}<small>{new URL(source.url).hostname}</small></span><Icon name="external" /></a></li>)}</ul></section>
         </div>

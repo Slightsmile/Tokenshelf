@@ -355,6 +355,27 @@ h1, h2, h3 { text-wrap: balance; }
 .integration-ai .copy-field > div { align-items: flex-start; }
 .integration-ai .copy-field code { font-size: 11px; }
 
+/* Standalone API integration docs page. */
+.docs-steps, .docs-section, .docs-note { max-width: 900px; }
+.docs-steps { margin-bottom: 38px; }
+.docs-section { margin-bottom: 38px; }
+.docs-steps h2, .docs-section h2, .docs-note h2 { font-size: 20px; line-height: 1.4; letter-spacing: -0.4px; font-weight: 600; margin: 0 0 17px; }
+.docs-steps ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; counter-reset: doc-step; }
+.docs-steps li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 14px; color: var(--muted); font-size: 14px; line-height: 1.8; }
+.docs-steps li::before { counter-increment: doc-step; content: counter(doc-step); display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid var(--line); border-radius: 50%; background: var(--surface); color: var(--ink); font-size: 12px; font-weight: 600; }
+.docs-steps strong { color: var(--ink); font-weight: 600; }
+.docs-code-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px 20px; margin: 6px 0 16px; }
+.docs-code-grid > div { min-width: 0; }
+.docs-code-grid .protocol-chip { display: inline-block; margin-bottom: 7px; }
+.docs-code { margin: 0; padding: 10px 12px; border: 1px solid var(--line); border-radius: 7px; background: var(--paper); overflow-x: auto; }
+.docs-code code { font-family: var(--mono); font-size: 12px; line-height: 1.7; white-space: pre; }
+.docs-code-grid p { margin: 7px 0 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.docs-code-grid p code, .integration-copy code, .integration-notes code { font-family: var(--mono); font-size: 11px; overflow-wrap: anywhere; }
+.protocol-chip { padding: 4px 8px; border: 1px solid var(--line); border-radius: 5px; background: var(--surface); color: var(--muted); font-size: 10px; font-weight: 550; white-space: nowrap; }
+.docs-note { margin-top: 42px; padding-top: 30px; border-top: 1px solid var(--line); }
+.docs-note p { color: var(--muted); font-size: 14px; line-height: 1.8; max-width: 72ch; margin: 0 0 14px; }
+.docs-note p:last-child { margin-bottom: 0; }
+
 /* Source explanations and browser-prepared submissions. */
 .methodology-content { max-width: 760px; }
 .methodology-content > section { margin-top: 35px; padding-top: 32px; border-top: 1px solid var(--line); }
@@ -647,6 +668,7 @@ h1, h2, h3 { text-wrap: balance; }
   .integration-base { grid-template-columns: 1fr; gap: 0; }
   .integration-targets > div { grid-template-columns: 1fr; gap: 7px; }
   .integration-targets ul { font-size: 12px; }
+  .docs-steps h2, .docs-section h2, .docs-note h2 { font-size: 19px; }
   .methodology-content h2 { font-size: 19px; }
   .methodology-content p { font-size: 13px; }
   .verification-guide > div { grid-template-columns: 1fr; gap: 8px; }

@@ -20,6 +20,7 @@ export default function SiteHeader() {
         <div className="nav-links">
           <Link href="/browse" aria-current={pathname === "/browse" ? "page" : undefined}>Offers</Link>
           <Link href="/categories" aria-current={pathname === "/categories" ? "page" : undefined}>Categories</Link>
+          <Link href="/integration" aria-current={pathname === "/integration" ? "page" : undefined}>API docs</Link>
           <Link href="/methodology" className="nav-about" aria-current={pathname === "/methodology" ? "page" : undefined}>How it works</Link>
         </div>
         <div className="nav-actions">
