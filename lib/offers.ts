@@ -14,6 +14,18 @@ export type ClaimStep = {
   link?: { label: string; url: string };
 };
 
+export type IntegrationProtocol = "openai" | "anthropic";
+
+export type ApiIntegration = {
+  protocols: IntegrationProtocol[];
+  openaiBase?: string;
+  anthropicBase?: string;
+  modelsEndpoint?: string;
+  modelsUrl?: string;
+  keyUrl?: string;
+  notes?: string[];
+};
+
 export type Offer = {
   id: string;
   provider: string;
@@ -42,6 +54,7 @@ export type Offer = {
   apiBase?: string;
   docsUrl?: string;
   modelsUrl?: string;
+  integration?: ApiIntegration;
   availability?: "offline";
   code?: string;
   codeLabel?: string;
@@ -298,6 +311,19 @@ const offerEntries: Offer[] = [
     modelsUrl: "https://agentrouter.org/pricing",
     apiBase: "https://agentrouter.org/v1",
     docsUrl: "https://agentrouter.org/docs/",
+    integration: {
+      protocols: ["openai", "anthropic"],
+      openaiBase: "https://agentrouter.org/v1",
+      anthropicBase: "https://agentrouter.org",
+      modelsEndpoint: "https://agentrouter.org/v1/models",
+      modelsUrl: "https://agentrouter.org/pricing",
+      keyUrl: "https://agentrouter.org/docs/",
+      notes: [
+        "OpenAI-compatible clients use the /v1 base URL. Anthropic-compatible clients use the root URL without /v1.",
+        "This gateway is tuned for coding tools; unsupported use can change the account's usage multiplier.",
+        "A depleted shared pool can return HTTP 402. Wait for the next allocation or try the other listed model.",
+      ],
+    },
     steps: [
       { title: "Join through the referral link", description: "Create an account using one of the available sign-in methods, then check the starter balance." },
       { title: "Collect your daily credit", description: "Log out and log back in as directed by the provider's FAQ to activate the $25 daily check-in reward." },
@@ -335,6 +361,17 @@ const offerEntries: Offer[] = [
     apiBase: "https://wusrouter.com/v1",
     docsUrl: "https://wusrouter.com/docs",
     modelsUrl: "https://wusrouter.com/models",
+    integration: {
+      protocols: ["openai"],
+      openaiBase: "https://wusrouter.com/v1",
+      modelsEndpoint: "https://wusrouter.com/v1/models",
+      modelsUrl: "https://wusrouter.com/models",
+      keyUrl: "https://wusrouter.com/docs",
+      notes: [
+        "Use the exact model ID from the live library. Routes ending in :free do not consume paid balance.",
+        "Some routes need an active plan even when the API key is valid.",
+      ],
+    },
     benefits: [
       "Join the official @wusrouter Telegram channel and complete WusRouter's membership verification to receive a gift code.",
       "Use Daily Sign In Token Bonus to collect the account's daily token reward.",
@@ -560,6 +597,17 @@ const offerEntries: Offer[] = [
     apiBase: "https://apichat.budsin.dev/v1",
     docsUrl: "https://chat.budsin.dev/docs.html",
     modelsUrl: "https://apichat.budsin.dev/pricing",
+    integration: {
+      protocols: ["openai"],
+      openaiBase: "https://apichat.budsin.dev/v1",
+      modelsEndpoint: "https://apichat.budsin.dev/v1/models",
+      modelsUrl: "https://apichat.budsin.dev/pricing",
+      keyUrl: "https://chat.budsin.dev/docs.html",
+      notes: [
+        "The panel API uses apichat.budsin.dev/v1; the older chat.budsin.dev/v1 REST endpoint is retired.",
+        "Model availability and credit cost depend on your account and the current pricing catalogue.",
+      ],
+    },
     benefits: [
       "New accounts receive $5–$20 in free sign-up credit, according to the supplied update.",
       "Collect an additional $1–$5 each day using check-in on the Profile page.",
@@ -780,6 +828,157 @@ const offerEntries: Offer[] = [
       { label: "OG Fo referral invitation", url: "https://wajo.ai/join?code=GT7YYCVS&utm_source=referral&utm_medium=invite_link" },
       { label: "Fo features and free plan pricing", url: "https://wajo.ai/" },
     ],
+  },
+  {
+    id: "deepgram",
+    provider: "Deepgram",
+    title: "$200 free credit, then pay-as-you-go",
+    description: "$200 in free credit for speech-to-text, text-to-speech, and voice agents. No credit card, no minimums, and the credit does not expire.",
+    category: "Multimodal",
+    amount: "$200 credit",
+    rewardLabel: "No card · no expiration",
+    requirement: "New account; no card",
+    refresh: "One-time credit; pay-as-you-go after",
+    access: "REST & WebSocket speech APIs",
+    tone: "green",
+    mark: "DG",
+    url: "https://console.deepgram.com/signup?jump=checkout&plan=pay-as-you-go",
+    verification: "confirmed",
+    checkedAt,
+    benefits: [
+      "The official pricing page gives every new Pay as you go account $200 in free credit, with no credit card required.",
+      "The credit does not expire and applies across speech-to-text, text-to-speech, and voice agent usage.",
+      "The FAQ says $200 covers roughly 43,000 minutes, over 700 hours, of Nova-3 transcription.",
+      "Billing is per second of processed audio, with no minimum duration and no rounding up.",
+      "There is no minimum or commitment; after the credit is used, the account continues at pay-as-you-go rates.",
+    ],
+    models: ["Nova-3", "Nova-3 Multilingual", "Flux STT", "Aura-2", "Aura-1", "Flux TTS"],
+    modelNote: "Deepgram prices work by product and model. Nova-3 and Flux cover speech-to-text; Aura-2, Aura-1, and Flux TTS cover text-to-speech. Voice Agent combines speech-to-text, a managed model, and text-to-speech in one per-minute rate.",
+    steps: [
+      { title: "Create a free Deepgram account", description: "Sign up for the Pay as you go plan. No credit card is required.", link: { label: "Sign up free", url: "https://console.deepgram.com/signup?jump=checkout&plan=pay-as-you-go" } },
+      { title: "Confirm the $200 credit", description: "Open the Deepgram Console and check the credit balance on your project before making requests." },
+      { title: "Create an API key", description: "Generate a project API key in the Console and store it as an environment variable in your app." },
+      { title: "Choose a product and model", description: "Pick a speech-to-text, text-to-speech, or voice agent route, then follow the documentation for the REST or WebSocket endpoint.", link: { label: "Read the documentation", url: "https://developers.deepgram.com/docs" } },
+    ],
+    conditions: [
+      "The $200 credit is a one-time new-account allowance; usage after it is exhausted is billed at pay-as-you-go rates.",
+      "The credit does not expire, and the Pay as you go plan has no minimum commitment or card requirement.",
+      "Pay as you go allows up to 150 concurrent streaming speech-to-text connections; requests beyond the limit are queued or rejected.",
+      "Rates differ by product and model. Check the current pricing page before estimating usage.",
+    ],
+    sourceNote: "The $200 credit, no-card and no-expiration terms, per-second billing, and model rates were confirmed on Deepgram's official pricing page and FAQ. The approximate transcription minutes come from that FAQ.",
+    sources: [
+      { label: "Official pricing and $200 credit", url: "https://deepgram.com/pricing" },
+      { label: "Deepgram Console sign-up", url: "https://console.deepgram.com/signup?jump=checkout&plan=pay-as-you-go" },
+      { label: "Developer documentation", url: "https://developers.deepgram.com/docs" },
+    ],
+    docsUrl: "https://developers.deepgram.com/docs",
+    modelsUrl: "https://deepgram.com/pricing",
+  },
+  {
+    id: "freebuff",
+    provider: "Freebuff",
+    title: "$0 coding agent with 30 hours a day",
+    description: "A free, ad-supported coding agent with 30 usage hours refilled daily and unlimited messages per session. Runs on desktop, CLI, web, and mobile.",
+    category: "AI agents",
+    amount: "30 hours daily",
+    rewardLabel: "$0/month · no card",
+    requirement: "Free account; no card",
+    refresh: "30 hours refilled daily",
+    access: "Desktop, CLI, web & mobile",
+    tone: "orange",
+    mark: "FB",
+    url: "https://freebuff.com/?ref=ref-95e64755-5740-48b7-a380-85ff3d609db6&via=settings_earn_link",
+    verification: "confirmed",
+    checkedAt,
+    benefits: [
+      "The Free plan is $0 per month and does not require a payment card.",
+      "It includes 30 usage hours refilled daily, with unlimited messages in each one-hour session.",
+      "The CLI installs with npm install -g freebuff and runs inside any project folder; desktop, web, and mobile apps are also available.",
+      "Terminal ads fund the free tier, and /byok can point the CLI at your own OpenRouter or OpenAI-compatible key.",
+      "Outside the 25+ full-access countries, Freebuff falls back to a limited mode with DeepSeek V4.1 Flash and 6 one-hour sessions per day.",
+    ],
+    models: ["DeepSeek V4.1 Flash", "DeepSeek V4.1 Flash Fast", "Solar Pro 4", "Solar Mini 4"],
+    modelNote: "The Free plan centers on DeepSeek V4.1 Flash and its faster variant, with Solar Pro 4 and Solar Mini 4 listed as promotional routes. Paid plans unlock more models; check the plans page for the current allowance.",
+    steps: [
+      { title: "Open Freebuff with the referral link", description: "Use the supplied link to reach Freebuff. No account, card, or config file is needed for the core product.", link: { label: "Open Freebuff", url: "https://freebuff.com/?ref=ref-95e64755-5740-48b7-a380-85ff3d609db6&via=settings_earn_link" } },
+      { title: "Install the app or CLI", description: "Download the desktop or mobile app, or install the CLI with npm install -g freebuff and run freebuff inside your project." },
+      { title: "Choose a model and start", description: "Use the included DeepSeek routes, or run /byok to connect your own OpenRouter or OpenAI-compatible key.", link: { label: "Compare Freebuff plans", url: "https://freebuff.com/plans" } },
+    ],
+    conditions: [
+      "Free usage is 30 hours per day; unused daily hours do not roll over, and each session lasts one hour with unlimited messages.",
+      "Fair-use limits apply: a session may pause or stop even when allowance remains.",
+      "Model availability and promotional allowances can change during the beta.",
+      "The ad-supported tier may analyze messages, agent traces, and app usage for ads and AI training. Review the privacy terms before using sensitive code.",
+      "Full-model access is limited to 25+ countries; VPN or unsupported regions switch the account to limited mode.",
+    ],
+    sourceNote: "The $0 plan, no-card access, 30 daily hours, model lineup, and limited-mode behavior were checked on Freebuff's plans page, homepage, and launch post. Fair-use and data-use terms come from the same pages.",
+    sources: [
+      { label: "Freebuff free plan and usage", url: "https://freebuff.com/plans" },
+      { label: "Freebuff homepage", url: "https://freebuff.com/" },
+      { label: "Freebuff launch details", url: "https://freebuff.com/blog/freebuff-launch" },
+    ],
+    modelsUrl: "https://freebuff.com/plans",
+  },
+  {
+    id: "openrouter",
+    provider: "OpenRouter",
+    title: "Free model router + 25 free models",
+    description: "Free inference through openrouter/free and 25+ free-model variants on an OpenAI-compatible API. No card; free requests are rate-limited.",
+    category: "Developer APIs",
+    amount: "25+ free models",
+    rewardLabel: "20 req/min · 50–1,000/day",
+    requirement: "Free account; no card",
+    refresh: "Daily free-request cap",
+    access: "OpenAI-compatible API & chat",
+    tone: "violet",
+    mark: "OR",
+    url: "https://openrouter.ai/sign-up",
+    verification: "confirmed",
+    checkedAt,
+    benefits: [
+      "openrouter/free routes each request to an available free model at $0 for prompt and completion tokens.",
+      "The Free plan includes 25+ free models from 4 free providers, with chat and API access.",
+      "Free models allow 20 requests per minute and 50 per day; buying at least $10 of credits raises the daily cap to 1,000.",
+      "The API is OpenAI-compatible, so most SDKs work by changing the base URL to https://openrouter.ai/api/v1.",
+      "BYOK includes $25,000 of list-price inference per month with no OpenRouter fee on Standard and Business.",
+    ],
+    models: ["openrouter/free", "nvidia/nemotron-3-ultra-550b-a55b-20260604", "google/gemma-4-31b-it-20260402", "baidu/ernie-5.5-flash-preview-20261110", "inclusionai/ling-3.2-flash-20261113"],
+    modelNote: "These are free-variant routes from the current Free Models Router, which chooses among 22 free models and filters by the features a request needs. Check the live free collection for exact IDs and availability.",
+    steps: [
+      { title: "Create a free OpenRouter account", description: "Sign up for the Free plan. No payment card is required.", link: { label: "Create an OpenRouter account", url: "https://openrouter.ai/sign-up" } },
+      { title: "Create an API key", description: "Generate a key in the OpenRouter dashboard and store it as an environment variable." },
+      { title: "Point your client at the free router", description: "Set the base URL to https://openrouter.ai/api/v1 and use the model openrouter/free, or choose a specific free model ID.", link: { label: "Copy from the quickstart", url: "https://openrouter.ai/docs/quickstart" } },
+      { title: "Raise the daily cap if needed", description: "Buy at least $10 in credits to lift the free-model daily limit from 50 to 1,000 requests. Failed attempts still count toward the cap." },
+    ],
+    conditions: [
+      "Free models are capped at 20 requests per minute and 50 per day; failed attempts count toward that daily cap.",
+      "Buying at least $10 in credits raises the free daily allowance to 1,000 requests; a negative balance blocks free models until credits are added.",
+      "Credit purchases carry a 5.5% Standard or 8% Business fee; inference itself is billed at provider list price with no markup.",
+      "BYOK includes $25,000 of list-price inference per month with no OpenRouter fee, then 5%.",
+      "Free model availability and the provider list change over time; check the live free collection.",
+    ],
+    sourceNote: "The free router, 25+ free models, rate limits, credit fee, and BYOK allowance were checked on OpenRouter's official pricing page, Free Models Router page, and quickstart documentation.",
+    sources: [
+      { label: "OpenRouter pricing and free limits", url: "https://openrouter.ai/pricing" },
+      { label: "Free Models Router", url: "https://openrouter.ai/openrouter/free" },
+      { label: "Free model collection", url: "https://openrouter.ai/collections/free-models" },
+      { label: "OpenRouter quickstart", url: "https://openrouter.ai/docs/quickstart" },
+    ],
+    docsUrl: "https://openrouter.ai/docs/quickstart",
+    modelsUrl: "https://openrouter.ai/collections/free-models",
+    integration: {
+      protocols: ["openai"],
+      openaiBase: "https://openrouter.ai/api/v1",
+      modelsEndpoint: "https://openrouter.ai/api/v1/models",
+      modelsUrl: "https://openrouter.ai/collections/free-models",
+      keyUrl: "https://openrouter.ai/docs/quickstart",
+      notes: [
+        "Free routes share a 20-requests-per-minute and 50-per-day cap; $10 in purchased credits raises the daily cap to 1,000.",
+        "Use openrouter/free to let the router pick a free model, or a specific :free model ID.",
+        "A negative credit balance blocks free models until you top up.",
+      ],
+    },
   },
 ];
 

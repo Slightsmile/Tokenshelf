@@ -331,6 +331,30 @@ h1, h2, h3 { text-wrap: balance; }
 .source-links small { display: block; color: var(--muted); margin-top: 3px; font-size: 10px; }
 .source-links a:hover { color: var(--accent); }
 
+/* API integration guides on offer pages. */
+.integration-base { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 4px 20px; margin: 4px 0 6px; }
+.integration-base-item .copy-field { margin: 0 0 6px; }
+.integration-base-item p { margin: 0 0 14px; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.integration-subhead { margin: 25px 0 10px; font-size: 14px; font-weight: 600; letter-spacing: -0.1px; }
+.integration-copy { color: var(--muted); font-size: 13px; line-height: 1.8; max-width: 72ch; margin: 0 0 10px; }
+.integration-discover .copy-field { margin-top: 4px; }
+.integration-discover .inline-link, .integration-ai .inline-link { font-size: 12px; }
+.integration-targets { margin: 4px 0 0; border-top: 1px solid var(--line); }
+.integration-targets > div { display: grid; grid-template-columns: 118px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.integration-targets dt { color: var(--muted); font-size: 11px; font-weight: 550; padding-top: 2px; }
+.integration-targets dd { margin: 0; min-width: 0; }
+.integration-targets ul { margin: 0; padding-left: 16px; color: var(--muted); font-size: 13px; line-height: 1.8; }
+.integration-targets li { margin-bottom: 7px; }
+.integration-targets li:last-child { margin-bottom: 0; }
+.integration-targets strong { color: var(--ink); font-weight: 600; }
+.integration-targets code, .integration-base-item code { font-family: var(--mono); font-size: 11px; overflow-wrap: anywhere; }
+.integration-notes { margin: 15px 0 0; padding-left: 16px; color: var(--muted); font-size: 12px; line-height: 1.8; }
+.integration-notes li { margin-bottom: 8px; }
+.integration-notes li:last-child { margin-bottom: 0; }
+.integration-ai { margin-top: 25px; }
+.integration-ai .copy-field > div { align-items: flex-start; }
+.integration-ai .copy-field code { font-size: 11px; }
+
 /* Source explanations and browser-prepared submissions. */
 .methodology-content { max-width: 760px; }
 .methodology-content > section { margin-top: 35px; padding-top: 32px; border-top: 1px solid var(--line); }
@@ -620,6 +644,9 @@ h1, h2, h3 { text-wrap: balance; }
   .detail-content > section { margin-bottom: 27px; padding-bottom: 26px; }
   .detail-notice { padding: 15px; gap: 10px; }
   .detail-notice p { font-size: 12px; }
+  .integration-base { grid-template-columns: 1fr; gap: 0; }
+  .integration-targets > div { grid-template-columns: 1fr; gap: 7px; }
+  .integration-targets ul { font-size: 12px; }
   .methodology-content h2 { font-size: 19px; }
   .methodology-content p { font-size: 13px; }
   .verification-guide > div { grid-template-columns: 1fr; gap: 8px; }
