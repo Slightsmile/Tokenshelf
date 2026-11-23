@@ -1,9 +1,11 @@
 import type { ReactNode } from "react";
 
-export type IconName = "arrow" | "external" | "bookmark" | "search" | "check" | "check-circle" | "clock" | "plus" | "close" | "copy" | "code" | "chat" | "sparkles" | "layers" | "chevron" | "link";
+export type IconName = "arrow" | "external" | "bookmark" | "search" | "check" | "check-circle" | "clock" | "plus" | "close" | "copy" | "code" | "chat" | "sparkles" | "layers" | "chevron" | "link" | "grid" | "list";
 
 export default function Icon({ name, className = "", filled = false }: { name: IconName; className?: string; filled?: boolean }) {
   const paths: Record<IconName, ReactNode> = {
+    grid: <><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /></>,
+    list: <><path d="M9 5h12M9 12h12M9 19h12M3 5h1M3 12h1M3 19h1" /></>,
     arrow: <><path d="M4 12h15M13 6l6 6-6 6" /></>,
     external: <><path d="M8 5H5v14h14v-3M12 5h7v7M10 14l9-9" /></>,
     bookmark: <path d="M6.5 4.5a1 1 0 0 1 1-1h9a1 1 0 0 1 1 1v16l-5.5-3.8-5.5 3.8z" fill={filled ? "currentColor" : "none"} />,

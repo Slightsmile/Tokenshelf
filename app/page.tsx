@@ -28,7 +28,6 @@ export default function Home() {
       <section className="home-section shell" id="featured" aria-labelledby="featured-title">
         <div className="section-heading" data-reveal=""><div><h2 id="featured-title">Featured offers<span className="heading-dot">.</span></h2><p>Big token drops and useful everyday access.</p></div><Link href="/browse" className="inline-link">Browse all {offers.length}<Icon name="arrow" /></Link></div>
         <div className="offer-grid">{featuredOffers.slice(0, 3).map((offer, index) => <OfferCard offer={offer} revealDelay={index * 65} key={offer.id} />)}</div>
-        <div className="offer-list featured-list"><div className="list-heading" aria-hidden="true"><span>Offer</span><span>What you get</span><span>Models</span><span /></div>{featuredOffers.slice(3).map((offer, index) => <OfferRow offer={offer} reveal revealDelay={index % 3 * 45} key={offer.id} />)}</div>
       </section>
 
       <section className="home-section recent-section shell" aria-labelledby="other-title">
