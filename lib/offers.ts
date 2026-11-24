@@ -747,8 +747,9 @@ const offerEntries: Offer[] = [
       {
         title: "Get a US IP address",
         items: [
-          "Install Proton VPN (free) and create a free account.",
-          "Keep switching between free servers until you get a US server. Use the app's Change server option.",
+          "Try the claim from a PC using Chrome.",
+          "Install the Proton VPN Chrome extension and create a free account.",
+          "Keep switching between free servers until you get a US server. Use the extension's Change server option.",
           "Proton assigns free servers randomly and has a cooldown between changes, so wait for its countdown before switching again.",
         ],
         link: { label: "Get Proton VPN", url: "https://protonvpn.com/download" },
@@ -757,7 +758,7 @@ const offerEntries: Offer[] = [
         title: "Create a Muse account",
         items: [
           "Visit https://muse.ai/join.",
-          "Sign up using a temporary Gmail account, as described in the submitted guide.",
+          "Use a Gmail account that is not synced to your Facebook account, as described in the submitted guide.",
         ],
         link: { label: "Join Muse", url: "https://muse.ai/join" },
       },
@@ -773,7 +774,7 @@ const offerEntries: Offer[] = [
     ],
     conditions: [
       "The invitation is described as a new-user offer with a 48-hour redemption window.",
-      "The US-IP and temporary Gmail steps come from the submitted guide. They are not requirements confirmed by Muse's public join page.",
+      "The US-IP, PC/Chrome, and Gmail-account guidance comes from the submitted guide. It is not a requirement confirmed by Muse's public join page.",
       "The code, reward, and redemption window have not been independently redeemed or verified.",
     ],
     sourceNote: "The reward and redemption guide are community-submitted. Muse's product and supported platforms are confirmed on its official site; Proton's free-server switching behaviour is confirmed in its support guide.",
