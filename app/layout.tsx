@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "TokenShelf | Free AI credits, tokens, and tools",
     description: "A clear directory of free AI credits, API tokens, trials, and tools.",
   },
-  twitter: { card: "summary", title: "TokenShelf | Free AI credits, tokens, and tools", description: "A clear directory of free AI credits, API tokens, trials, and tools." },
+  twitter: { card: "summary_large_image", title: "TokenShelf | Free AI credits, tokens, and tools", description: "A clear directory of free AI credits, API tokens, trials, and tools." },
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
   verification: { google: process.env.GOOGLE_SITE_VERIFICATION },
 };
