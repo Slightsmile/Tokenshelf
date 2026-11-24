@@ -15,7 +15,7 @@ export function VerificationBadge({ offer }: { offer: Pick<Offer, "verification"
 }
 
 export function AvailabilityBadge({ offer }: { offer: Pick<Offer, "availability"> }) {
-  return offer.availability === "offline" ? <span className="availability-badge"><Icon name="clock" />Models offline</span> : null;
+  return offer.availability === "offline" ? <span className="availability-badge"><Icon name="clock" />Unavailable</span> : null;
 }
 
 export function DailyLoginBadge({ offer }: { offer: Pick<Offer, "dailyLogin" | "refresh"> }) {

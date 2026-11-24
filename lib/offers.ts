@@ -162,6 +162,41 @@ const offerEntries: Offer[] = [
     ],
   },
   {
+    id: "sleepyai",
+    provider: "SleepyAI",
+    title: "Referral sign-up offer",
+    description: "Create a SleepyAI account through the supplied referral link and check the current account benefits.",
+    category: "Text & chat",
+    amount: "See account offer",
+    rewardLabel: "Referral link",
+    requirement: "New account through the referral link",
+    refresh: "Check the current account terms",
+    access: "SleepyAI account",
+    tone: "violet",
+    mark: "SA",
+    url: "https://www.sleepyai.org/signup?ref=aeu8t6nd",
+    verification: "community",
+    checkedAt: "2026-11-24",
+    benefits: [
+      "Sign up through the supplied referral link.",
+      "Review the account dashboard for any current referral benefit or included access.",
+    ],
+    models: [],
+    modelNote: "No model list or reward amount was supplied with this referral link. Check SleepyAI's current account terms after registering.",
+    steps: [
+      { title: "Open the referral sign-up page", description: "Use the supplied SleepyAI link so the referral code is included when you register.", link: { label: "Join SleepyAI", url: "https://www.sleepyai.org/signup?ref=aeu8t6nd" } },
+      { title: "Check your account benefits", description: "After creating your account, review the dashboard and current terms for the available access and any referral reward." },
+    ],
+    conditions: [
+      "No reward amount, model list, or eligibility details were supplied with this referral link.",
+      "Referral benefits and availability can change; verify the terms shown in your account.",
+    ],
+    sourceNote: "The SleepyAI referral link was supplied by the community. Its current benefits have not been independently verified.",
+    sources: [
+      { label: "SleepyAI referral sign-up", url: "https://www.sleepyai.org/signup?ref=aeu8t6nd" },
+    ],
+  },
+  {
     id: "freegg",
     provider: "FreeGG",
     title: "GPT-6.1 Sol credits + daily login",
@@ -262,6 +297,11 @@ const offerEntries: Offer[] = [
     url: "https://vyceai.com/signup?ref=VYCE_SU74QS",
     verification: "partial",
     checkedAt,
+    availability: "offline",
+    notice: {
+      title: "Unavailable",
+      description: "VyceAI is currently unavailable. The referral and daily-credit details below are retained for reference only.",
+    },
     benefits: [
       "The official sign-up form offers $40 as the standard starter balance and $50 with a referral code.",
       "The referral form says the new user receives $50 and the referrer receives $10.",
@@ -1043,7 +1083,7 @@ const offerEntries: Offer[] = [
   },
 ];
 
-export const featuredOfferOrder = ["seekai", "freegg", "muse", "hcnsec", "qronos", "vyceai", "agentrouter", "wusrouter", "gwarden", "wajo", "tokenharbor"];
+export const featuredOfferOrder = ["seekai", "freegg", "muse", "hcnsec", "qronos", "agentrouter", "wusrouter", "gwarden", "wajo", "tokenharbor"];
 
 const featuredRanks = new Map(featuredOfferOrder.map((id, index) => [id, index + 1] as const));
 export const offers: Offer[] = offerEntries.map((offer) => ({ ...offer, featured: featuredRanks.get(offer.id) })).sort(compareOffers);
@@ -1052,7 +1092,7 @@ export const featuredOffers = offers
   .filter((offer) => offer.featured !== undefined)
   .sort((a, b) => a.featured! - b.featured!);
 
-export const landingMoreOfferOrder = ["wajo", "deepgram", "mlai", "gemini", "clixad", "qronos"];
+export const landingMoreOfferOrder = ["wajo", "deepgram", "mlai", "gemini", "clixad", "sleepyai", "qronos"];
 
 export const landingMoreOffers = landingMoreOfferOrder
   .map((id) => offers.find((offer) => offer.id === id))
