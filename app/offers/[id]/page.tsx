@@ -37,7 +37,6 @@ export default function OfferPage({ params }: { params: { id: string } }) {
   return (
     <main id="main" className="shell page-main detail-main">
       <JsonLd data={structuredData} />
-      <Link href="/browse" className="back-link"><Icon name="arrow" />All offers</Link>
       <header className="detail-heading"><div className="detail-provider"><ProviderMark offer={offer} /><div><p>{offer.provider}</p><Link href={`/browse?category=${encodeURIComponent(offer.category)}`}>{offer.category}</Link></div><VerificationBadge offer={offer} /><AvailabilityBadge offer={offer} /></div><h1>{offer.title}</h1><p className="detail-intro">{offer.description}</p></header>
       <div className="detail-layout">
         <aside className="offer-summary" aria-label="Offer at a glance">
