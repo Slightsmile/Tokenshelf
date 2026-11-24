@@ -383,6 +383,7 @@ h1, h2, h3 { text-wrap: balance; }
 .methodology-content h2 { font-size: 20px; font-weight: 600; letter-spacing: -0.4px; margin-bottom: 16px; }
 .methodology-content p { font-size: 14px; line-height: 1.85; color: var(--muted); margin-bottom: 16px; }
 .methodology-content p strong { font-weight: 550; color: var(--ink); }
+.about-links { display: flex; flex-wrap: wrap; gap: 13px 22px; }
 .verification-guide { margin: 20px 0 0; }
 .verification-guide > div { display: grid; grid-template-columns: 155px minmax(0, 1fr); gap: 25px; padding: 17px 0; border-bottom: 1px solid var(--line); }
 .verification-guide > div:last-child { border-bottom: 0; padding-bottom: 0; }
