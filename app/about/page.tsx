@@ -6,6 +6,7 @@ import PageShell from "../components/PageShell";
 export const metadata: Metadata = {
   title: "About",
   description: "TokenShelf is an initiative to make useful AI access easier to find for everyone.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

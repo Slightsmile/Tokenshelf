@@ -4,7 +4,7 @@ import OfferDirectory from "../components/OfferDirectory";
 import { offers } from "../../lib/offers";
 import { toOfferSummary } from "../../lib/offer-summary";
 
-export const metadata: Metadata = { title: "Browse free AI offers" };
+export const metadata: Metadata = { title: "Browse free AI offers", description: "Browse free AI API credits, tokens, trials, coding agents, chat tools, and multimodal offers. Filter by provider, category, or model.", alternates: { canonical: "/browse" } };
 
 export default function BrowsePage({ searchParams }: { searchParams: { q?: string; category?: string; sort?: string; model?: string } }) {
   const query = typeof searchParams.q === "string" ? searchParams.q : "";

@@ -7,20 +7,36 @@ import Icon from "../../components/Icon";
 import { AvailabilityBadge, DailyLoginBadge, ProviderMark, VerificationBadge } from "../../components/OfferCard";
 import ModelLogos from "../../components/ModelLogos";
 import SaveButton from "../../components/SaveButton";
+import JsonLd from "../../components/JsonLd";
+import { absoluteUrl } from "../../../lib/site";
 
 export function generateStaticParams() { return offers.map((offer) => ({ id: offer.id })); }
 
 export function generateMetadata({ params }: { params: { id: string } }): Metadata {
   const offer = getOffer(params.id);
-  return { title: offer ? `${offer.provider}: ${offer.title}` : "Offer not found", description: offer?.description };
+  if (!offer) return { title: "Offer not found", robots: { index: false, follow: false } };
+  const path = `/offers/${offer.id}`;
+  return {
+    title: `${offer.provider}: ${offer.title}`,
+    description: offer.description,
+    alternates: { canonical: path },
+    robots: offer.availability === "offline" ? { index: false, follow: true } : undefined,
+    openGraph: { type: "article", url: path, title: `${offer.provider}: ${offer.title} | TokenShelf`, description: offer.description },
+  };
 }
 
 export default function OfferPage({ params }: { params: { id: string } }) {
   const offer = getOffer(params.id);
   if (!offer) notFound();
+  const offerUrl = absoluteUrl(`/offers/${offer.id}`);
+  const structuredData = [
+    { "@context": "https://schema.org", "@type": "WebPage", name: `${offer.provider}: ${offer.title}`, description: offer.description, url: offerUrl, dateModified: offer.checkedAt, isPartOf: { "@type": "WebSite", name: "TokenShelf", url: absoluteUrl() } },
+    { "@context": "https://schema.org", "@type": "BreadcrumbList", itemListElement: [{ "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl() }, { "@type": "ListItem", position: 2, name: "Offers", item: absoluteUrl("/browse") }, { "@type": "ListItem", position: 3, name: offer.provider, item: offerUrl }] },
+  ];
 
   return (
     <main id="main" className="shell page-main detail-main">
+      <JsonLd data={structuredData} />
       <Link href="/browse" className="back-link"><Icon name="arrow" />All offers</Link>
       <header className="detail-heading"><div className="detail-provider"><ProviderMark offer={offer} /><div><p>{offer.provider}</p><Link href={`/browse?category=${encodeURIComponent(offer.category)}`}>{offer.category}</Link></div><VerificationBadge offer={offer} /><AvailabilityBadge offer={offer} /></div><h1>{offer.title}</h1><p className="detail-intro">{offer.description}</p></header>
       <div className="detail-layout">

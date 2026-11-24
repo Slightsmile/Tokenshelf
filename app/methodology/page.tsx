@@ -5,7 +5,7 @@ import Icon from "../components/Icon";
 import { VerificationBadge } from "../components/OfferCard";
 import PageShell from "../components/PageShell";
 
-export const metadata: Metadata = { title: "Sources and offer labels" };
+export const metadata: Metadata = { title: "How TokenShelf verifies AI offers", description: "Understand TokenShelf's confirmed, partial, and community offer labels, sources, and referral-link disclosures.", alternates: { canonical: "/methodology" } };
 
 export default function MethodologyPage() {
   const lastChecked = offers.map((offer) => offer.checkedAt).sort().at(-1)!;

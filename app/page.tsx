@@ -4,12 +4,25 @@ import HeroShelf from "./components/HeroShelf";
 import Icon from "./components/Icon";
 import OfferCard from "./components/OfferCard";
 import OfferRow from "./components/OfferRow";
+import JsonLd from "./components/JsonLd";
+import { absoluteUrl } from "../lib/site";
 
 const heroOffers = featuredOffers.slice(0, 3);
 
 export default function Home() {
+  const faq = [
+    { question: "What is TokenShelf?", answer: "TokenShelf is a directory of free AI credits, API tokens, trials, and tools. Each listing explains the offer, requirements, limits, claim steps, and verification status." },
+    { question: "Are TokenShelf offers verified?", answer: "Each offer has a confirmed, partial, or community label. Confirmed details come from a provider's public information; partial and community listings explain what still needs checking." },
+    { question: "How can I submit a free AI offer?", answer: "Use the Submit an offer page to share the provider link, free amount, eligibility, and claim instructions. TokenShelf reviews submissions before listing them." },
+  ];
+  const structuredData = [
+    { "@context": "https://schema.org", "@type": "WebSite", name: "TokenShelf", url: absoluteUrl(), description: "A directory of free AI credits, API tokens, trials, and tools.", potentialAction: { "@type": "SearchAction", target: `${absoluteUrl("/browse")}?q={search_term_string}`, "query-input": "required name=search_term_string" } },
+    { "@context": "https://schema.org", "@type": "Organization", name: "TokenShelf", url: absoluteUrl(), sameAs: ["https://github.com/Slightsmile/Tokenshelf"] },
+    { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map(({ question, answer }) => ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })) },
+  ];
   return (
     <main id="main" className="home-main">
+      <JsonLd data={structuredData} />
       <section className="hero shell" aria-labelledby="hero-title">
         <div className="hero-copy">
           <p className="eyebrow hero-eyebrow"><span className="little-dot" />The free AI access directory</p>
@@ -40,6 +53,11 @@ export default function Home() {
           const count = offers.filter((offer) => offer.category === category.name).length;
           return <Link href={`/browse?category=${encodeURIComponent(category.name)}`} className="category-link" data-reveal="" data-reveal-delay={index * 45} key={category.name}><span className="category-icon"><Icon name={category.icon} /></span><span><strong>{category.name}</strong><span>{count} {count === 1 ? "offer" : "offers"}</span></span><Icon name="chevron" /></Link>;
         })}</div>
+      </section>
+
+      <section className="home-section shell answer-section" aria-labelledby="answers-title">
+        <div className="section-heading"><div><h2 id="answers-title">Free AI offers, explained clearly.</h2><p>Quick answers before you choose an offer.</p></div><Link href="/methodology" className="quiet-link">How we check<Icon name="arrow" /></Link></div>
+        <div className="answer-grid">{faq.map((item) => <article key={item.question}><h3>{item.question}</h3><p>{item.answer}</p></article>)}</div>
       </section>
 
       <section className="submission-banner shell" data-reveal=""><span className="submission-icon"><Icon name="plus" /></span><div><h2>Found something good?</h2><p>Share an offer. Give someone else a head start.</p></div><Link href="/submit" className="button button-secondary">Share an offer<Icon name="arrow" /></Link></section>

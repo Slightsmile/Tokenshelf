@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import CopyField from "../components/CopyField";
 import PageShell from "../components/PageShell";
 
-export const metadata: Metadata = { title: "API integration docs" };
+export const metadata: Metadata = { title: "Connect free AI APIs", description: "Learn how to connect OpenAI-compatible and Anthropic-compatible AI APIs to coding tools, CLIs, agents, and SDKs.", alternates: { canonical: "/integration" } };
 
 const discovery = `curl "$BASE_URL/models" \\\n  -H "Authorization: Bearer $API_KEY"`;
 

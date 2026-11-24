@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import Icon from "../components/Icon";
 import PageShell from "../components/PageShell";
-
 const formEndpoint = "https://formspree.io/f/xlgqpkwg";
 
 export default function SubmitPage() {
