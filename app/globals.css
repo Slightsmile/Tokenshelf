@@ -717,6 +717,15 @@ h1, h2, h3 { text-wrap: balance; }
   .submission-actions { flex-direction: column; }
 }
 
+/* Invite lanes listed on an offer page. */
+.referral-intro { color: var(--muted); font-size: 14px; line-height: 1.8; margin: 0; }
+.referral-list { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 12px; }
+.referral-list > li { display: grid; gap: 7px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.referral-list h3 { font-size: 14px; font-weight: 600; margin: 0; text-wrap: initial; }
+.referral-list p { color: var(--muted); font-size: 13px; line-height: 1.75; margin: 0; }
+.referral-list code { justify-self: start; padding: 3px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); font-family: var(--mono); font-size: 12px; }
+.referral-list .inline-link { justify-self: start; font-size: 12px; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }

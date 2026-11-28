@@ -51,6 +51,20 @@ export default function OfferPage({ params }: { params: { id: string } }) {
           {offer.notice && <div className={`detail-notice${offer.availability === "offline" ? " notice-offline" : ""}`}><Icon name="clock" /><div><strong>{offer.notice.title}</strong><p>{offer.notice.description}</p></div></div>}
           <section aria-labelledby="included-title"><h2 id="included-title">What’s included</h2><ul className="benefit-list">{offer.benefits.map((benefit) => <li key={benefit}><Icon name="check" /><span>{benefit}</span></li>)}</ul></section>
           <section aria-labelledby="claim-title"><div className="detail-section-heading"><h2 id="claim-title">How to claim</h2><span>{offer.steps.length} steps</span></div><ol className="claim-steps">{offer.steps.map((step, index) => <li key={step.title}><span className="step-number" aria-hidden="true">{index + 1}</span><div><h3>{step.title}</h3>{step.description && <p>{step.description}</p>}{step.items && <ul>{step.items.map((item) => <li key={item}>{item}</li>)}</ul>}{step.link && <a className="inline-link step-link" href={step.link.url} target="_blank" rel="noopener noreferrer">{step.link.label}<Icon name="external" /></a>}</div></li>)}</ol></section>
+          {offer.referrals && (
+            <section aria-labelledby="referrals-title">
+              <div className="detail-section-heading"><h2 id="referrals-title">{offer.referrals.title}</h2><span>{offer.referrals.links.length} referral lanes</span></div>
+              <p className="referral-intro">{offer.referrals.intro}</p>
+              <ul className="referral-list">{offer.referrals.links.map((link) => (
+                <li key={link.url}>
+                  <h3>{link.title}</h3>
+                  <p>{link.reward}</p>
+                  {link.code && <code>{link.code}</code>}
+                  <a className="inline-link" href={link.url} target="_blank" rel="noopener noreferrer">Open in Telegram<Icon name="external" /></a>
+                </li>
+              ))}</ul>
+            </section>
+          )}
           <section aria-labelledby="models-title">
             <h2 id="models-title">Models & access</h2>
             {offer.models.length > 0 && <ul className="model-tags">{offer.models.map((model) => <li key={model}>{model}</li>)}</ul>}

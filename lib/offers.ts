@@ -14,6 +14,19 @@ export type ClaimStep = {
   link?: { label: string; url: string };
 };
 
+export type ReferralLink = {
+  title: string;
+  reward: string;
+  url: string;
+  code?: string;
+};
+
+export type ReferralBlock = {
+  title: string;
+  intro: string;
+  links: ReferralLink[];
+};
+
 export type IntegrationProtocol = "openai" | "anthropic";
 
 export type ApiIntegration = {
@@ -48,6 +61,7 @@ export type Offer = {
   modelFamilies?: ModelFamily[];
   modelNote: string;
   steps: ClaimStep[];
+  referrals?: ReferralBlock;
   conditions: string[];
   sourceNote: string;
   sources: { label: string; url: string }[];
@@ -825,6 +839,7 @@ const offerEntries: Offer[] = [
       "The shared invitation offers 1 billion Muse tokens to both the new user and the inviter after successful redemption.",
       "Muse is Meta's personal AI agent for tasks such as email, calendars, research, shopping, and planning.",
       "The official site describes a persistent cloud computer for each user and access through web and mobile apps.",
+      "Several Telegram bots also trade Muse tokens for invites. Their lanes, rewards and codes are listed under the invite lanes section, and each one is a separate third-party program.",
     ],
     models: ["Muse personal AI agent"],
     modelNote: "Muse's public pages describe the agent and its capabilities, but do not publish a separate model catalogue for this invitation. The tokens in the submitted offer are Muse tokens.",
@@ -857,10 +872,40 @@ const offerEntries: Offer[] = [
         ],
       },
     ],
+    referrals: {
+      title: "More Muse invite lanes",
+      intro: "Four Telegram bots hand out Muse tokens for invites. Every link below is the account holder's own referral link: a new user joins through it, follows the bot's steps and claims the tokens there. The amounts come from the bots, not from Muse.",
+      links: [
+        {
+          title: "DreamX Muse bot — 1B per verified invite",
+          reward: "Open the link, join the two required channels, then tap Muse Free Token and send your invite code; the balance updates automatically. The separate 1B Muse account lane needs 30 invited friends, so it is not a first-step reward.",
+          url: "https://t.me/DreamXMuseServerBot?start=ref_cmwoouj5w01d9kxmweskstoz8",
+        },
+        {
+          title: "TunVN PreHub bot — +1B per first /start",
+          reward: "Each friend who starts the bot for the first time credits 1B, redeemable as a 1B Muse AI Buff Token or one Muse AI 1B account.",
+          url: "https://t.me/TunVN_PreHub_bot?start=ref2112685625",
+          code: "ref2112685625",
+        },
+        {
+          title: "KeyCraft Shop bot — +3B you, +3B friend",
+          reward: "Unlimited sign-ups: the inviter earns 3B and the friend gets a 3B welcome bonus. The invite code is built into the link and can also be entered by hand.",
+          url: "https://t.me/KeyCraftShopBot?start=REF-586104CB",
+          code: "REF-586104CB",
+        },
+        {
+          title: "SonDev store bot — +3B per verified friend",
+          reward: "Friends who join through the link receive 3B on channel join, direct sign-ups receive 1B, and the inviter earns 3B for each verified friend.",
+          url: "https://t.me/sondevstorebot?start=ref_2112685625",
+          code: "ref_2112685625",
+        },
+      ],
+    },
     conditions: [
       "The invitation is described as a new-user offer with a 48-hour redemption window.",
       "The US-IP, PC/Chrome, and Gmail-account guidance comes from the submitted guide. It is not a requirement confirmed by Muse's public join page.",
       "The code, reward, and redemption window have not been independently redeemed or verified.",
+      "The four Telegram invite lanes are run by individual sellers, not by Muse. Their 1B and 3B amounts, verification rules, payout timing and account handling are outside Muse's published terms.",
     ],
     sourceNote: "The reward and redemption guide are community-submitted. Muse's product and supported platforms are confirmed on its official site; Proton's free-server switching behaviour is confirmed in its support guide.",
     sources: [
